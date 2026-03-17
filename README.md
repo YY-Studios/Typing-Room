@@ -1,6 +1,7 @@
 # Next.js Boilerplate
 
 Next.js 기반 프론트엔드 프로젝트를 빠르게 시작하기 위한 Boilerplate입니다.
+수정 테스트
 
 ## Stack
 
