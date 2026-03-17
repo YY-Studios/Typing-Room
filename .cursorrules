@@ -1,0 +1,11 @@
+- 스타일링은 shadcn/ui 컴포넌트 우선 사용
+- shadcn에 없는 경우 tailwind-variants (tv()) 로 직접 구현
+- 언어는 TypeScript
+- 컴포넌트는 Next.js App Router 기준
+- 폴더 구조는 FSD
+- 애니메이션은 framer-motion
+- 상태관리는 Zustand
+- 서버상태는 TanStack Query
+- UI 크기는 항상 compact (text-xs~sm, p-2~p-3)
+- 변수명 임의로 변경 금지
+- 수정 위치는 주석으로 표시
