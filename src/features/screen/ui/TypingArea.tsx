@@ -1,9 +1,11 @@
-import { useTypingSettingStroe } from '@/shared/stores/useTypingSettingStore';
 import { useTypingEngine } from '../hooks/useTypingEngine';
 import { useEffect } from 'react';
 import clsx from 'clsx';
-export const TypingArea = () => {
-  const { selectedText } = useTypingSettingStroe();
+export const TypingArea = ({
+  typingEngine,
+}: {
+  typingEngine: ReturnType<typeof useTypingEngine>;
+}) => {
   const {
     chars,
     textareaRef,
@@ -13,8 +15,7 @@ export const TypingArea = () => {
     getCharState,
     isFocused,
     setIsFocused,
-    isComplete,
-  } = useTypingEngine(selectedText);
+  } = typingEngine;
 
   useEffect(() => {
     focusTextarea();
