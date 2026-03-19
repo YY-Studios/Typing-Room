@@ -14,9 +14,9 @@ export default function Screen() {
   return (
     <div className="flex flex-col gap-6 p-5 max-w-xl mx-auto">
       {/* 언어 선택 */}
-      <LanguageSelector />
+      <LanguageSelector resetEngine={typingEngine.resetEngine} />
       {/* 타입 선택 */}
-      <TypeSelector />
+      <TypeSelector resetEngine={typingEngine.resetEngine} />
       {/* 타이핑 피드백/몰입 요소 */}
       <TypingStats accuracy={typingEngine.accuracy} cpm={typingEngine.cpm} />
       <TypingArea typingEngine={typingEngine} />

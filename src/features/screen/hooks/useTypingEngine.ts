@@ -19,6 +19,7 @@ export const useTypingEngine = (text: string) => {
     if (value.length > 0 && !startTime) {
       setStartTime(Date.now());
     }
+    console.log(value);
 
     if (Array.from(value).length > chars.length) return;
     setUserInput(value);
@@ -71,6 +72,12 @@ export const useTypingEngine = (text: string) => {
     return () => clearInterval(interval);
   }, [startTime, strokeCount, isFinished]);
 
+  /** 세팅 초기화 함수 */
+  const resetEngine = () => {
+    setUserInput('');
+    setCpm(0);
+    setStartTime(null);
+  };
   return {
     /** 원본 문장을 글자 단위로 쪼갠 배열 */
     chars,
@@ -90,5 +97,6 @@ export const useTypingEngine = (text: string) => {
     cpm,
     /** 문장 타이핑 완료 여부 */
     isFinished,
+    resetEngine,
   };
 };
