@@ -30,8 +30,9 @@ export const TypingArea = ({
       >
         {chars.map((char, i) => {
           const state = getCharState(i);
-          const displauChar =
-            state === 'wrong' && userInput[i] !== ' ' ? userInput[i] : char;
+          const isInvisibleChar = userInput[i] === ' ' || userInput[i] === '\n';
+          const displayChar =
+            state === 'wrong' && !isInvisibleChar ? userInput[i] : char;
           return (
             <span
               key={i}
@@ -40,7 +41,7 @@ export const TypingArea = ({
                 'text-blue-500': state === 'correct',
               })}
             >
-              {displauChar}
+              {displayChar}
               {state === 'cursor' && isFocused && (
                 <span className="absolute -left-[2px] top-[2px] w-[4px] h-[1em] bg-yellow-400 animate-pulse animate-blink" />
               )}
