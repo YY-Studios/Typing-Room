@@ -16,7 +16,7 @@ export default function Screen() {
       {/* 언어 선택 */}
       <LanguageSelector resetEngine={typingEngine.resetEngine} />
       {/* 타입 선택 */}
-      <TypeSelector />
+      <TypeSelector resetEngine={typingEngine.resetEngine} />
       {/* 타이핑 피드백/몰입 요소 */}
       <TypingStats accuracy={typingEngine.accuracy} cpm={typingEngine.cpm} />
       <TypingArea typingEngine={typingEngine} />

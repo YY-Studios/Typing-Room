@@ -19,6 +19,7 @@ export const useTypingEngine = (text: string) => {
     if (value.length > 0 && !startTime) {
       setStartTime(Date.now());
     }
+    console.log(value);
 
     if (Array.from(value).length > chars.length) return;
     setUserInput(value);

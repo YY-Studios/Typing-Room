@@ -55,6 +55,7 @@ export const TypingArea = ({
         onChange={handleChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        value={userInput}
         disabled={isFinished}
         name=""
         id=""
