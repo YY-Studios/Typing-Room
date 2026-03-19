@@ -15,6 +15,7 @@ export const TypingArea = ({
     getCharState,
     isFocused,
     setIsFocused,
+    isFinished,
   } = typingEngine;
 
   useEffect(() => {
@@ -54,6 +55,7 @@ export const TypingArea = ({
         onChange={handleChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        disabled={isFinished}
         name=""
         id=""
         className="fixed bottom-0 bg-gray-30k0"
