@@ -33,3 +33,43 @@ body {
 .animate-blink {
   animation: blink 1s step-end infinite;
 }
+
+/* 1. 디자인 시스템 변수 정의 */
+@layer base {
+  :root {
+    --background: #F5F0E6; /* Morning Glow 배경 */
+    --surface: #FFFFFF;
+    --text-main: #2A2A2A;
+    --text-sub: #7A7A7A;
+    
+    /* 💡 여기에 primary 컬러 변수를 추가합니다 */
+    --primary: #FFB800;
+    --primary-light: #FDE6B3;
+  }
+
+  .dark {
+    --background: #0F111A; /* Midnight 배경 */
+    --surface: #1A1C26;
+    --text-main: #F5F5F5;
+    --text-sub: #9CA3AF;
+    
+    /* 다크모드에서도 primary는 유지하거나 살짝 조정 가능 */
+    --primary: #FFB800; 
+  }
+}
+
+/* 2. 테일윈드 테마와 연결 (핵심!) */
+@theme {
+  /* 💡 text-primary, bg-primary 등을 사용 가능하게 연결 */
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-text-main: var(--text-main);
+  --color-text-sub: var(--text-sub);
+
+  /* 폰트 설정 (Next.js font 변수와 연결) */
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+}
