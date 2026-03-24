@@ -1,4 +1,5 @@
 import { QueryProvider } from '@/shared/providers/query-provider';
+import { Header } from '@/widgets/header/ui/Header';
 import './globals.css';
 
 export default function RootLayout({
@@ -9,7 +10,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <Header />
+          <main className="pt-[72px]">{children}</main>
+        </QueryProvider>
       </body>
     </html>
   );
