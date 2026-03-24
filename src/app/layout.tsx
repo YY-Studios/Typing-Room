@@ -12,7 +12,7 @@ export default function RootLayout({
       <body>
         <QueryProvider>
           <Header />
-          {children}
+          <main className="pt-[72px]">{children}</main>
         </QueryProvider>
       </body>
     </html>

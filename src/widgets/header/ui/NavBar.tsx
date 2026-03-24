@@ -21,16 +21,13 @@ export const NavBar = () => {
             key={item.name}
             href={item.href}
             className={clsx(
-              'relative pb-1 text-[15px] font-medium transition-colors',
+              'relative pb-1 text-lg font-medium transition-colors',
               isActive
-                ? 'text-primary-light dark:text-primary'
+                ? 'text-nav border-b-2 border-primary'
                 : 'text-text-sub hover:text-text-main',
             )}
           >
             {item.name}
-            {isActive && (
-              <span className="absolute left-0 -bottom-[18px] w-full h-[3px] bg-primary-light dark:bg-primary rounded-full" />
-            )}
           </Link>
         );
       })}
