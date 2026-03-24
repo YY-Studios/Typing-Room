@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import type { Application } from '@splinetool/runtime';
+import { useTypingSound } from './useTypingSound';
 
 const KEY_OFFSET = 10;
 
@@ -47,6 +48,8 @@ const KEY_MAP: Record<string, string> = {
 export function useKeyboardInput(
   splineRef: React.RefObject<Application | null>,
 ) {
+  const currentTheme = 'honey';
+  const { playTypingSound } = useTypingSound(currentTheme);
   useEffect(() => {
     // 키 중복 방지 (꾹 누르고 있을 때 반복 발생 차단)
     const pressedKeys = new Set<string>();
@@ -61,6 +64,8 @@ export function useKeyboardInput(
       pressedKeys.add(e.code);
       const obj = spline.findObjectByName(splineName);
       if (obj) obj.position.y -= KEY_OFFSET;
+
+      playTypingSound();
     }
 
     function handleKeyUp(e: KeyboardEvent) {
