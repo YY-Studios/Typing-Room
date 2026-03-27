@@ -61,10 +61,6 @@ export const TypingArea = ({
         id=""
         className="fixed bottom-0 bg-gray-30k0"
       ></textarea>
-      {/* 출처 */}
-      <div className="mt-6 text-sm text-gray-500 italic">
-        💭 살며시 놓아둔 말
-      </div>
     </div>
   );
 };
