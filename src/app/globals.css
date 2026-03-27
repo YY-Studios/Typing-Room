@@ -47,7 +47,6 @@
 
 /* 3. 기본 바디 스타일 */
 body {
-  background-color: var(--background);
   color: var(--text-main);
   font-family: var(--font-sans), Arial, sans-serif;
   transition: background-color 0.3s, color 0.3s;
