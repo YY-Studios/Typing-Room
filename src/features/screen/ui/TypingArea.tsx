@@ -59,7 +59,7 @@ export const TypingArea = ({
         disabled={isFinished}
         name=""
         id=""
-        className="fixed bottom-0 bg-gray-30k0"
+        className="fixed bottom-0 bg-gray-30k0 opacity-0"
       ></textarea>
     </div>
   );
