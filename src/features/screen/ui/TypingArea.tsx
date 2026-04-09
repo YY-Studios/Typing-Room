@@ -27,11 +27,17 @@ export const TypingArea = ({
       {/* 문장 영역 */}
       <div
         onClick={focusTextarea}
-        className="text-2xl leading-relaxed text-gray-300 tracking-wide text-center max-w-2xl"
+        className="text-2xl leading-relaxed text-gray-300 tracking-wide text-center max-w-2xl break-words"
       >
         {chars.map((char, i) => {
           const state = getCharState(i);
-          const isInvisibleChar = userInput[i] === ' ' || userInput[i] === '\n';
+          // 원본이 공백/개행이거나 유저가 공백/개행을 입력한 경우 원본 char 유지
+          // (공백을 visible char로 교체하면 줄바꿈 기회가 사라져 overflow 발생)
+          const isInvisibleChar =
+            char === ' ' ||
+            char === '\n' ||
+            userInput[i] === ' ' ||
+            userInput[i] === '\n';
           const displayChar =
             state === 'wrong' && !isInvisibleChar ? userInput[i] : char;
           return (
