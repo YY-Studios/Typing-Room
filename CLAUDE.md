@@ -57,6 +57,18 @@ src/
 - **Zustand** (`shared/stores/`) — client UI state (selected emotion, language, current text)
 - **TanStack Query** — server state (wrapped in `shared/providers/query-provider.tsx`)
 
+## Auth & API Pattern (BFF)
+
+Dev-craft 패턴 그대로 적용. Supabase Auth 라이브러리 사용 안 함.
+See `.claude/rules/supabase-auth.md` for full patterns.
+
+- **clientApi**: 프론트 → BFF (`credentials: 'include'`로 쿠키 자동 전송)
+- **serverApi**: BFF → Supabase REST (service role key, 서버 전용)
+- **Auth**: 카카오 OAuth → 커스텀 JWT → httpOnly 쿠키
+- 모든 보호 API: `cookies()` → `verifyAccessToken()` → `user_id` 추출
+
+**Env vars needed:** `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `JWT_SECRET`, `KAKAO_CLIENT_ID`, `KAKAO_CLIENT_SECRET`
+
 ## Code Style
 
 - **UI size**: Always compact — `text-xs`/`text-sm`, `p-2`/`p-3`

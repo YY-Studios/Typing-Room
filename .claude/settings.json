@@ -1,0 +1,16 @@
+{
+  "enableAllProjectMcpServers": true,
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /c/Users/user/Typing-Room && npx eslint --fix \"${CLAUDE_TOOL_INPUT_FILE_PATH}\" 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
+  }
+}
