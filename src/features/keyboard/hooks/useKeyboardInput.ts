@@ -71,14 +71,19 @@ export function useKeyboardInput(scene: Group) {
 
   useEffect(() => {
     const pressedKeys = new Set<string>();
+    const basePositions = new Map<string, number>(); // 원래 Y값 저장 (IME drift 방지)
 
     function handleKeyDown(e: KeyboardEvent) {
+      if (e.isComposing) return; // IME 조합 중 스킵
       const splineName = KEY_MAP[e.code];
       if (!splineName || pressedKeys.has(e.code)) return;
 
       pressedKeys.add(e.code);
       const obj = scene.getObjectByName(splineName);
-      if (obj) obj.position.y -= KEY_OFFSET;
+      if (obj) {
+        basePositions.set(e.code, obj.position.y); // 원래 위치 저장
+        obj.position.y -= KEY_OFFSET;
+      }
 
       playTypingSound();
     }
@@ -89,7 +94,13 @@ export function useKeyboardInput(scene: Group) {
 
       pressedKeys.delete(e.code);
       const obj = scene.getObjectByName(splineName);
-      if (obj) obj.position.y += KEY_OFFSET;
+      if (obj) {
+        const baseY = basePositions.get(e.code);
+        if (baseY !== undefined) {
+          obj.position.y = baseY; // 원래 위치로 복원 (keyup 중복 발생해도 drift 없음)
+          basePositions.delete(e.code);
+        }
+      }
     }
 
     window.addEventListener('keydown', handleKeyDown);
