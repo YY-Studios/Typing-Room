@@ -74,7 +74,6 @@ export function useKeyboardInput(scene: Group) {
     const basePositions = new Map<string, number>(); // 원래 Y값 저장 (IME drift 방지)
 
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.isComposing) return; // IME 조합 중 스킵
       const splineName = KEY_MAP[e.code];
       if (!splineName || pressedKeys.has(e.code)) return;
 
