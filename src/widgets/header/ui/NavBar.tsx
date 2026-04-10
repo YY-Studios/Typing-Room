@@ -7,6 +7,7 @@ const MENU = [
   { name: 'Practice', href: '/' },
   { name: 'History', href: '/history' },
   { name: 'Stats', href: '/stats' },
+  { name: 'Store', href: '/store' },
 ];
 
 export const NavBar = () => {

@@ -57,6 +57,44 @@ button {
   cursor: pointer;
 }
 
+/* 키드코어 유틸 */
+.plastic-shine {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+}
+
+.sticker-shadow {
+  filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.2));
+}
+
+.bubble-text-shadow {
+  text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes starburst-spin {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
 /* 애니메이션 */
 @keyframes blink {
   0%,
