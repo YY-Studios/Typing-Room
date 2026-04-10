@@ -6,6 +6,7 @@ import prettier from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 import globals from 'globals';
 
 export default [
@@ -31,6 +32,7 @@ export default [
       prettier,
       react,
       'react-hooks': reactHooks,
+      'jsx-a11y': jsxA11y,
     },
     languageOptions: {
       parser: typescriptParser,
@@ -60,6 +62,13 @@ export default [
         { argsIgnorePattern: '^_' },
       ],
       'no-console': ['warn', { allow: ['warn', 'error'] }],
+      // 접근성 규칙
+      'jsx-a11y/alt-text': 'warn',
+      'jsx-a11y/aria-props': 'warn',
+      'jsx-a11y/aria-role': 'warn',
+      'jsx-a11y/interactive-supports-focus': 'warn',
+      'jsx-a11y/click-events-have-key-events': 'warn',
+      'jsx-a11y/no-noninteractive-element-interactions': 'warn',
     },
   },
 ];

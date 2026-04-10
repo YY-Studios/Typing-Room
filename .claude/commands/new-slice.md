@@ -1,16 +1,47 @@
-Scaffold a new FSD slice. Follow these steps:
+Scaffold a new FSD slice. Follow the dev-craft project's actual conventions:
 
-1. Ask the user which layer: `features`, `widgets`, or `shared`
-2. Ask the user for the slice name (kebab-case)
-3. Create the following structure under `src/{layer}/{slice-name}/`:
-   - `ui/` directory (create a `.gitkeep` file inside)
-   - `model/` directory (create a `.gitkeep` file inside)
-   - `index.ts` with an empty comment: `// {slice-name} public API`
-4. Confirm what was created
+**Step 1** — Ask the user:
 
-Rules to follow (from .claude/rules/fsd-architecture.md):
+1. Which layer? (`features`, `widgets`, or `shared`)
+2. Slice name? (kebab-case)
+3. What does this slice do? (brief description to decide structure)
 
+**Step 2** — Choose structure based on complexity:
+
+Simple (single component or hook):
+
+```
+src/{layer}/{slice-name}/
+└── ComponentName.tsx   ← directly at root, no subfolders
+```
+
+Medium (a few related files):
+
+```
+src/{layer}/{slice-name}/
+├── ComponentName.tsx
+└── hooks/
+    └── useSliceName.ts
+```
+
+Full (complex feature with types):
+
+```
+src/{layer}/{slice-name}/
+├── ui/
+│   └── ComponentName.tsx
+├── hooks/
+│   └── useSliceName.ts
+└── model/
+    └── types.ts
+```
+
+**Rules:**
+
+- Do NOT create `index.ts` barrel exports in features/ or widgets/ slices
+- Only add `model/` if there are actual TypeScript types to define
+- Only add `ui/` subfolder if there are multiple components
 - Only import downward: app → widgets → features → shared
-- Component files: PascalCase.tsx
-- Hook files: use-kebab-case.ts
-- Slice folder: kebab-case/
+- Component files: PascalCase.tsx, hooks: use-kebab-case.ts
+
+**Step 3** — Create only the files that are actually needed for the chosen structure. Do not create empty placeholder files.
