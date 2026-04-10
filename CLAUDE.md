@@ -34,9 +34,11 @@ src/
 │   ├── keyboard/  # 3D keyboard (React Three Fiber) + sound
 │   └── screen/    # Typing engine, stats display, text area
 ├── shared/        # Cross-cutting concerns
+│   ├── ui/        # 공통 컴포넌트 (Button, Input, NoData, Pagination, Modal)
 │   ├── stores/    # Zustand global state
 │   ├── lib/       # Pure utility functions
 │   ├── config/    # Sound preset definitions
+│   ├── api/       # clientApi (BFF 호출), serverApi (Supabase REST)
 │   └── providers/ # React Query provider + devtools
 └── widgets/       # Page-level layout sections (header)
 ```
@@ -72,6 +74,6 @@ See `.claude/rules/supabase-auth.md` for full patterns.
 ## Code Style
 
 - **UI size**: Always compact — `text-xs`/`text-sm`, `p-2`/`p-3`
-- **Styling**: Tailwind CSS 4; use `shadcn/ui` components first, fall back to `tailwind-variants` (`tv()`)
+- **Styling**: Tailwind CSS 4; 컴포넌트 우선순위: `shared/ui` → `shadcn/ui` → `tailwind-variants` (`tv()`)
 - **Path alias**: `@/*` maps to `src/*`
 - Do not rename variables arbitrarily; mark any modifications with comments
