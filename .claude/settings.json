@@ -26,6 +26,16 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -c \"& { [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType=WindowsRuntime] > $null; $t = [Windows.UI.Notifications.ToastTemplateType]::ToastText02; $xml = [Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent($t); $xml.GetElementsByTagName('text')[0].AppendChild($xml.CreateTextNode('Claude Code')) > $null; $xml.GetElementsByTagName('text')[1].AppendChild($xml.CreateTextNode('작업이 완료되었습니다 ✓')) > $null; [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier('Claude Code').Show([Windows.UI.Notifications.ToastNotification]::new($xml)) }\" 2>/dev/null || true"
+          }
+        ]
+      }
     ]
   }
 }
