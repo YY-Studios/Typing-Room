@@ -1,6 +1,17 @@
 {
   "enableAllProjectMcpServers": true,
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"${CLAUDE_TOOL_INPUT_COMMAND}\" | grep -qE '(rm -rf|git push --force|git push -f|git reset --hard)' && echo 'BLOCKED: 위험한 명령어입니다. 사용자 확인이 필요합니다.' && exit 1 || exit 0"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit",
@@ -8,6 +19,10 @@
           {
             "type": "command",
             "command": "cd /c/Users/user/Typing-Room && npx eslint --fix \"${CLAUDE_TOOL_INPUT_FILE_PATH}\" 2>/dev/null || true"
+          },
+          {
+            "type": "command",
+            "command": "cd /c/Users/user/Typing-Room && npx prettier --write \"${CLAUDE_TOOL_INPUT_FILE_PATH}\" 2>/dev/null || true"
           }
         ]
       }

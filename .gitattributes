@@ -1,0 +1,14 @@
+# 모든 텍스트 파일 → LF로 통일 (저장소 + 체크아웃 모두)
+* text=auto eol=lf
+
+# 바이너리 — 변환 금지
+*.glb binary
+*.wav binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
