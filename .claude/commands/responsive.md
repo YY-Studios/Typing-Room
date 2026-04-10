@@ -1,19 +1,33 @@
-Audit the current component or file for mobile responsiveness issues.
+Audit the current component or file for mobile responsiveness issues. Follow these standards:
 
-Check for:
+**Breakpoints (Tailwind)**
 
-1. **Fixed widths** — hard-coded px widths (w-[800px]) that break on mobile
-2. **Touch targets** — buttons/links smaller than 44×44px
-3. **Mobile-first** — styles written desktop-first without mobile fallback
-4. **Hover-only interactions** — hover: states with no active: equivalent for touch
-5. **Font sizes** — text smaller than 12px (text-xs) on mobile
-6. **Overflow** — anything that could cause horizontal scroll
-7. **Images** — missing w-full or max-w-full on img elements
+- Default (no prefix): mobile base styles
+- sm: 640px+, md: 768px+, lg: 1024px+
+- Always write mobile-first — default styles for mobile, expand with sm:/md:/lg:
 
-Report findings as a checklist:
+**Touch targets**
 
-- ✅ Pass / ⚠️ Warning / ❌ Fail for each category
-- List specific line numbers or class names with issues
-- Suggest Tailwind fixes inline
+- All buttons/links: minimum 44×44px (use min-h-[44px] min-w-[44px] or padding)
+
+**Forbidden patterns**
+
+- Hard-coded px widths (w-[800px]) — use max-w- + w-full instead
+- hover: only interactions — touch has no hover, always pair with active:
+- Font smaller than text-xs (12px) on mobile alone
+- Anything causing horizontal scroll
+
+**Images**
+
+- img elements must have w-full or max-w-full
+- Use object-cover with container for fixed-size images
+
+---
+
+Check the provided component for each category above and report:
+
+- ✅ Pass / ⚠️ Warning / ❌ Fail
+- Specific line numbers or Tailwind class names with issues
+- Suggested Tailwind fix for each issue
 
 Do NOT auto-fix — report only.
