@@ -1,4 +1,5 @@
 import { QueryProvider } from '@/shared/providers/query-provider';
+import { ModalProvider } from '@/shared/ui/modal';
 import { Header } from '@/widgets/header/ui/Header';
 import './globals.css';
 import { Geist } from 'next/font/google';
@@ -15,8 +16,10 @@ export default function RootLayout({
     <html lang="ko" className={cn('font-sans', geist.variable)}>
       <body>
         <QueryProvider>
-          <Header />
-          {children}
+          <ModalProvider>
+            <Header />
+            {children}
+          </ModalProvider>
         </QueryProvider>
       </body>
     </html>
