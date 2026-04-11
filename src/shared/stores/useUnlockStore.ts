@@ -16,7 +16,7 @@ interface UnlockStoreState {
 export const useUnlockStore = create<UnlockStoreState>((set, get) => ({
   points: 120, // 초기 포인트 (테스트용)
   unlockedIds: new Set(['default', 'honey']),
-  activeKeyboardId: 'default',
+  activeKeyboardId: 'honey', // TODO: 테스트용 — 기본값 'default'로 복구
   activeSoundId: 'honey',
 
   addPoints: (amount) => set((state) => ({ points: state.points + amount })),

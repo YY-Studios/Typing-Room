@@ -1,33 +1,50 @@
 import * as THREE from 'three';
 
 /**
- * 키보드 3D 모델 재질 상수
- *
- * @description 컴포넌트 외부에 선언하여 리렌더링마다 새로 생성되지 않도록 최적화
- * - BASE: 키보드 베이스 플레이트 (핑크 계열)
- * - PINK: 알파벳 키캡 (연핑크)
- * - CREAM: 특수키 키캡 (크림)
+ * 키보드 테마 색상 타입
  */
-export const MATERIALS = {
-  BASE: new THREE.MeshStandardMaterial({ color: '#E8848A' }),
-  PINK: new THREE.MeshStandardMaterial({ color: '#F4A0A0' }),
-  CREAM: new THREE.MeshStandardMaterial({ color: '#F5ECD7' }),
+export interface KeyboardTheme {
+  colors: {
+    base: string; // 키보드 베이스 플레이트
+    keys: string; // 알파벳 키캡
+    accent: string; // 특수키 키캡
+  };
+}
+
+/**
+ * 키보드 테마 목록
+ *
+ * @description 새 테마 추가 시 이 객체에 항목만 추가하면 됨
+ */
+export const KEYBOARD_THEMES: Record<string, KeyboardTheme> = {
+  default: {
+    colors: { base: '#E8848A', keys: '#F4A0A0', accent: '#F5ECD7' },
+  },
+  honey: {
+    colors: { base: '#FF8C00', keys: '#FFFFFF', accent: '#FFB800' },
+  },
 };
 
 /**
- * 키보드 베이스 플레이트 mesh 이름 목록
+ * 테마 색상으로 Three.js 재질 생성
  *
- * @description traverse 시 BASE 재질을 적용할 mesh 이름
+ * @description useMemo와 함께 사용 — activeKeyboardId 변경 시에만 재생성
+ */
+export const createMaterials = (theme: KeyboardTheme) => ({
+  BASE: new THREE.MeshStandardMaterial({ color: theme.colors.base }),
+  KEYS: new THREE.MeshStandardMaterial({ color: theme.colors.keys }),
+  ACCENT: new THREE.MeshStandardMaterial({ color: theme.colors.accent }),
+});
+
+/**
+ * 키보드 베이스 플레이트 mesh 이름 목록
  */
 export const BASE_NAMES = ['keyboard-base', 'Rectangle_2'];
 
 /**
- * 핑크 색상을 적용할 키 오브젝트 이름 목록
+ * 키 색상(KEYS)을 적용할 키 오브젝트 이름 목록
  *
  * @description GLB 내 Object3D 이름 기준
- * - 알파벳 키 + 특수키(TAB, ESC, BACKSPACE, ENTER) 포함
- * - KEY_MAP과 함께 관리
- * @see {@link KEY_MAP} 키 입력 매핑
  */
 export const PINK_KEYS = [
   'key_TAB',

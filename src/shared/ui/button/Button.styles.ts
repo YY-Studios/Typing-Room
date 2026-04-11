@@ -18,6 +18,8 @@ export const buttonStyles = tv({
       danger: 'border-4 border-white bg-red-500 text-white sticker-shadow',
       ghost: 'border-2 border-primary/30 bg-primary-light text-nav',
       dark: 'border-4 border-white bg-black/70 text-white backdrop-blur-sm',
+      subtle:
+        'border-2 border-gray-100 bg-gray-50 text-gray-500 hover:border-gray-200 hover:bg-gray-100',
     },
     size: {
       sm: 'px-4 py-1.5 text-xs',

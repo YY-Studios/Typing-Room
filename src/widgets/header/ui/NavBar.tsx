@@ -1,11 +1,11 @@
 'use client';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { clsx } from 'clsx';
 
 const MENU = [
   { name: 'Practice', href: '/' },
-  { name: 'History', href: '/history' },
   { name: 'Stats', href: '/stats' },
   { name: 'Store', href: '/store' },
 ];
@@ -14,7 +14,7 @@ export const NavBar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="flex gap-8 ml-10">
+    <nav className="flex gap-1">
       {MENU.map((item) => {
         const isActive = pathname === item.href;
         return (
@@ -22,10 +22,10 @@ export const NavBar = () => {
             key={item.name}
             href={item.href}
             className={clsx(
-              'relative pb-1 text-lg font-medium transition-colors',
+              'rounded-full border-2 px-4 py-1.5 text-xs font-black uppercase tracking-wider transition-all hover:scale-105 active:scale-95',
               isActive
-                ? 'text-nav border-b-2 border-primary'
-                : 'text-text-sub hover:text-text-main',
+                ? 'sticker-shadow border-white bg-primary text-white'
+                : 'border-transparent text-gray-400 hover:bg-gray-100 hover:text-gray-600',
             )}
           >
             {item.name}
