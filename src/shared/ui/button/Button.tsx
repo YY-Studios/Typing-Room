@@ -4,7 +4,13 @@ import Link, { type LinkProps } from 'next/link';
 import { type ComponentPropsWithoutRef, type ReactNode } from 'react';
 import { buttonStyles } from './Button.styles';
 
-type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost' | 'dark';
+type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'danger'
+  | 'ghost'
+  | 'dark'
+  | 'subtle';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
 interface BaseButtonProps {

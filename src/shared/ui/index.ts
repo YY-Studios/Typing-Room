@@ -1,5 +1,9 @@
 export { Button } from './button/Button';
 
+export { Toggle } from './toggle/Toggle';
+
+export { VolumeSlider } from './volume-slider/VolumeSlider';
+
 export { Input } from './input/Input';
 export type { InputProps } from './input/Input';
 
