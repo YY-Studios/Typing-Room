@@ -71,18 +71,17 @@ useGLTF.preload('/models/keyboard.glb');
 /**
  * 키보드 Canvas 래퍼 컴포넌트
  *
- * @description activeKeyboardId에 따라 테마 색상 + 오버레이를 동적으로 적용
+ * @description activeThemeId에 따라 테마 색상 + 오버레이를 동적으로 적용
  */
 export const BaseKeyboard = () => {
-  const activeKeyboardId = useUnlockStore((s) => s.activeKeyboardId);
+  const activeThemeId = useUnlockStore((s) => s.activeThemeId);
 
   const materials = useMemo(() => {
-    const theme =
-      KEYBOARD_THEMES[activeKeyboardId] ?? KEYBOARD_THEMES['default'];
+    const theme = KEYBOARD_THEMES[activeThemeId] ?? KEYBOARD_THEMES['default'];
     return createMaterials(theme);
-  }, [activeKeyboardId]);
+  }, [activeThemeId]);
 
-  const Overlay = THEME_OVERLAYS[activeKeyboardId];
+  const Overlay = THEME_OVERLAYS[activeThemeId];
 
   return (
     <div className="w-full h-full pointer-events-none" style={{ zIndex: 0 }}>

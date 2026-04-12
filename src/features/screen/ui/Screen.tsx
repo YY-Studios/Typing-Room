@@ -12,7 +12,7 @@ export default function Screen() {
   const { selectedText } = useTypingSettingStroe();
   const typingEngine = useTypingEngine(selectedText);
   return (
-    <div className="max-w-5xl mx-auto mt-10 p-5 rounded-3xl border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+    <div className="max-w-5xl mx-auto mt-10 p-5 rounded-3xl border-[3px] border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
       <div className="flex items-center justify-between gap-2">
         <div>
           <TypingStats

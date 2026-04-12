@@ -3,7 +3,7 @@
 import { X, Volume2, Music, Zap } from 'lucide-react';
 import { Button, Toggle, VolumeSlider } from '@/shared/ui';
 
-// TODO: [스토어/API 연결] useUnlockStore (unlockedIds, activeKeyboardId, applyKeyboard)
+// TODO: [스토어/API 연결] useUnlockStore (unlockedIds, activeThemeId, applyTheme)
 const MOCK_SKINS = [
   { id: 'default', name: 'Honey Pink', color: 'bg-pink-400' },
   { id: 'honey', name: 'Honey Bee', color: 'bg-amber-400' },
@@ -70,7 +70,7 @@ export const PreferencesDrawer = ({ onClose }: PreferencesDrawerProps) => {
               </span>
             </div>
 
-            {/* TODO: [스토어/API 연결] useUnlockStore (unlockedIds, activeKeyboardId, applyKeyboard) */}
+            {/* TODO: [스토어/API 연결] useUnlockStore (unlockedIds, activeThemeId, applyTheme) */}
             <div className="flex gap-3">
               {MOCK_SKINS.map((skin) => {
                 const isActive = skin.id === MOCK_ACTIVE_SKIN;

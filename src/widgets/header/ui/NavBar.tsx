@@ -14,7 +14,7 @@ export const NavBar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="flex gap-1">
+    <nav className="flex flex-1 justify-center gap-1">
       {MENU.map((item) => {
         const isActive = pathname === item.href;
         return (
