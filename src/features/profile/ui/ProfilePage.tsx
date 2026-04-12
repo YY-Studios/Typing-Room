@@ -6,7 +6,7 @@ import { modal } from '@/shared/ui/modal';
 import { OwnedItemCard } from './OwnedItemCard';
 
 // ─── Mock 데이터 ───────────────────────────────────────────────────
-// TODO: useUnlockStore 연결 (unlockedIds, activeKeyboardId, activeSoundId)
+// TODO: useUnlockStore 연결 (unlockedIds, activeThemeId, applyTheme)
 const MOCK_USER = { name: '핑핑이' };
 
 const MOCK_KEYBOARD_SKINS = [

@@ -2,29 +2,43 @@
 
 # Supabase 테이블 스키마
 
-## keyboards
+## themes (구 keyboards)
 
-| 컬럼        | 타입        | 설명       |
-| ----------- | ----------- | ---------- |
-| id          | uuid PK     |            |
-| slug        | text UNIQUE |            |
-| name_ko     | text        |            |
-| name_en     | text        |            |
-| description | text        |            |
-| is_free     | boolean     | 기본 false |
-| sort_order  | smallint    | 기본 0     |
-| created_at  | timestamptz |            |
+| 컬럼         | 타입        | 설명               |
+| ------------ | ----------- | ------------------ |
+| id           | uuid PK     |                    |
+| slug         | text UNIQUE |                    |
+| name_ko      | text        |                    |
+| name_en      | text        |                    |
+| description  | text        |                    |
+| is_free      | boolean     | 기본 false         |
+| sort_order   | smallint    | 기본 0             |
+| color_base   | text        | 키보드 베이스 색상 |
+| color_keys   | text        | 알파벳 키캡 색상   |
+| color_accent | text        | 특수키 키캡 색상   |
+| created_at   | timestamptz |                    |
 
-## keyboard_sounds
+## theme_sounds (구 keyboard_sounds)
 
-| 컬럼        | 타입                   | 설명       |
-| ----------- | ---------------------- | ---------- |
-| id          | uuid PK                |            |
-| keyboard_id | uuid FK → keyboards.id |            |
-| key_type    | enum                   |            |
-| file_url    | text                   |            |
-| is_free     | boolean                | 기본 false |
-| created_at  | timestamptz            |            |
+| 컬럼       | 타입                | 설명       |
+| ---------- | ------------------- | ---------- |
+| id         | uuid PK             |            |
+| theme_id   | uuid FK → themes.id |            |
+| key_type   | enum                |            |
+| file_url   | text                |            |
+| is_free    | boolean             | 기본 false |
+| created_at | timestamptz         |            |
+
+## theme_decos (신규)
+
+| 컬럼       | 타입                | 설명                                  |
+| ---------- | ------------------- | ------------------------------------- |
+| id         | uuid PK             |                                       |
+| theme_id   | uuid FK → themes.id |                                       |
+| position   | text                | left, top, top-right, bottom-right 등 |
+| image_url  | text                |                                       |
+| sort_order | smallint            | 기본 0                                |
+| created_at | timestamptz         |                                       |
 
 ## moods
 
@@ -67,7 +81,7 @@
 | ------------ | ---------------------- | ---- |
 | id           | uuid PK                |      |
 | user_id      | uuid FK → profiles.id  |      |
-| keyboard_id  | uuid FK → keyboards.id |      |
+| theme_id     | uuid FK → themes.id    |      |
 | mood_id      | uuid FK → moods.id     |      |
 | sentence_id  | uuid FK → sentences.id |      |
 | duration_sec | smallint               |      |
@@ -76,10 +90,10 @@
 
 ## user_unlocks
 
-| 컬럼        | 타입                  | 설명                    |
-| ----------- | --------------------- | ----------------------- |
-| id          | uuid PK               |                         |
-| user_id     | uuid FK → profiles.id |                         |
-| item_type   | enum                  |                         |
-| item_id     | uuid                  | keyboards 또는 moods id |
-| unlocked_at | timestamptz           |                         |
+| 컬럼        | 타입                  | 설명                 |
+| ----------- | --------------------- | -------------------- |
+| id          | uuid PK               |                      |
+| user_id     | uuid FK → profiles.id |                      |
+| item_type   | enum                  |                      |
+| item_id     | uuid                  | themes 또는 moods id |
+| unlocked_at | timestamptz           |                      |
