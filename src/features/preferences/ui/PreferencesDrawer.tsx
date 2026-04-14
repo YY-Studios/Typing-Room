@@ -145,10 +145,6 @@ export const PreferencesDrawer = ({ onClose }: PreferencesDrawerProps) => {
               <Button variant="subtle" size="sm" className="w-full py-3">
                 Support
               </Button>
-              {/* TODO: [스토어/API 연결] 로그아웃 */}
-              <Button variant="subtle" size="sm" className="w-full py-3">
-                Logout
-              </Button>
             </div>
           </div>
         </div>

@@ -2,13 +2,20 @@
 
 import { useState } from 'react';
 import { User, Lock, LogOut, ChevronRight } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { modal } from '@/shared/ui/modal';
+import { Input } from '@/shared/ui';
+import { useAuth } from '@/features/auth/ui/useAuth';
+import { clientApi } from '@/shared/api/client/clientApi';
 import { OwnedItemCard } from './OwnedItemCard';
+import {
+  nicknameSchema,
+  type NicknameFormData,
+} from '@/features/profile/model/schema';
 
-// ─── Mock 데이터 ───────────────────────────────────────────────────
+// ─── Mock 데이터 (테마 연결은 별도) ─────────────────────────────────
 // TODO: useUnlockStore 연결 (unlockedIds, activeThemeId, applyTheme)
-const MOCK_USER = { name: '핑핑이' };
-
 const MOCK_KEYBOARD_SKINS = [
   {
     id: 'default',
@@ -48,8 +55,42 @@ const MOCK_ACTIVE_SOUND = 'honey';
 // ──────────────────────────────────────────────────────────────────
 
 export const ProfilePage = () => {
+  const { user, isLoggedIn } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<NicknameFormData>({
+    resolver: zodResolver(nicknameSchema),
+    values: { nickname: user?.nickname ?? '' },
+  });
+
   const [isEditingName, setIsEditingName] = useState(false);
-  const [nameValue, setNameValue] = useState(MOCK_USER.name);
+
+  const onSubmitNickname = async (data: NicknameFormData) => {
+    try {
+      await clientApi('auth/profile', {
+        method: 'PATCH',
+        body: { nickname: data.nickname },
+      });
+      await modal.alert('닉네임이 변경되었어요!', {
+        emoji: '✅',
+        title: '변경 완료',
+      });
+      setIsEditingName(false);
+    } catch (e) {
+      await modal.alert(e instanceof Error ? e.message : '변경에 실패했어요.', {
+        emoji: '❌',
+        title: '오류',
+      });
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditingName(false);
+    reset({ nickname: user?.nickname ?? '' });
+  };
 
   // TODO: useUnlockStore의 removeUnlock 연결
   const handleDelete = async (name: string, id: string) => {
@@ -64,12 +105,6 @@ export const ProfilePage = () => {
       },
     );
     if (confirmed) console.warn('delete', id); // TODO: removeUnlock 연결
-  };
-
-  // TODO: BFF /api/auth/profile PATCH 연결 (이름 변경)
-  const handleNameSave = () => {
-    console.warn('save name', nameValue);
-    setIsEditingName(false);
   };
 
   // TODO: BFF /api/auth/password PATCH 연결
@@ -94,6 +129,14 @@ export const ProfilePage = () => {
     );
     if (confirmed) console.warn('withdraw'); // TODO: 탈퇴 API 연결
   };
+
+  if (!isLoggedIn) {
+    return (
+      <div className="flex min-h-screen items-center justify-center pt-[72px]">
+        <p className="text-sm font-bold text-text-sub">로그인이 필요합니다.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 via-amber-50/60 to-background pt-[72px] dark:from-indigo-950/60 dark:via-slate-900/80 dark:to-background">
@@ -130,38 +173,38 @@ export const ProfilePage = () => {
                 <div className="flex items-center justify-between py-3">
                   <span className="text-sm font-bold text-text-sub">이름</span>
                   {isEditingName ? (
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="text"
-                        value={nameValue}
-                        onChange={(e) => setNameValue(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && handleNameSave()}
+                    <form
+                      onSubmit={handleSubmit(onSubmitNickname)}
+                      className="flex items-center gap-2"
+                    >
+                      <Input
+                        {...register('nickname')}
+                        error={!!errors.nickname}
+                        errorMsg={errors.nickname?.message}
                         aria-label="이름 입력"
-                        className="rounded-xl border-2 border-primary bg-primary-light px-3 py-1.5 text-sm font-bold text-text-main outline-none focus:ring-2 focus:ring-primary/50"
                         autoFocus
                       />
                       <button
-                        onClick={handleNameSave}
-                        className="rounded-full border-2 border-primary bg-primary px-3 py-1.5 text-xs font-black uppercase tracking-wider text-white transition-transform hover:scale-105 active:scale-95"
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="rounded-full border-2 border-primary bg-primary px-3 py-1.5 text-xs font-black uppercase tracking-wider text-white transition-transform hover:scale-105 active:scale-95 disabled:opacity-50"
                       >
                         저장
                       </button>
                       <button
-                        onClick={() => {
-                          setIsEditingName(false);
-                          setNameValue(MOCK_USER.name);
-                        }}
+                        type="button"
+                        onClick={handleCancelEdit}
                         className="rounded-full border-2 border-gray-200 bg-gray-100 px-3 py-1.5 text-xs font-black uppercase tracking-wider text-gray-500 transition-transform hover:scale-105 active:scale-95 dark:border-white/20 dark:bg-white/10 dark:text-white/60"
                       >
                         취소
                       </button>
-                    </div>
+                    </form>
                   ) : (
                     <button
                       onClick={() => setIsEditingName(true)}
                       className="flex items-center gap-1.5 rounded-full border-2 border-primary/30 bg-primary-light px-3 py-1.5 text-sm font-bold text-nav transition-transform hover:scale-105 active:scale-95"
                     >
-                      {nameValue}
+                      {user?.nickname}
                       <ChevronRight size={14} aria-hidden="true" />
                     </button>
                   )}

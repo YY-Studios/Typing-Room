@@ -67,20 +67,20 @@
 
 ## profiles
 
-| 컬럼       | 타입                       | 설명 |
-| ---------- | -------------------------- | ---- |
-| id         | uuid PK FK → auth.users.id |      |
-| nickname   | text                       |      |
-| avatar_url | text                       |      |
-| created_at | timestamptz                |      |
-| updated_at | timestamptz                |      |
+| 컬럼       | 타입        | 설명                    |
+| ---------- | ----------- | ----------------------- |
+| id         | text PK     | 카카오 ID (숫자 문자열) |
+| nickname   | text        |                         |
+| avatar_url | text        |                         |
+| created_at | timestamptz |                         |
+| updated_at | timestamptz |                         |
 
 ## typing_results
 
 | 컬럼         | 타입                   | 설명 |
 | ------------ | ---------------------- | ---- |
 | id           | uuid PK                |      |
-| user_id      | uuid FK → profiles.id  |      |
+| user_id      | text FK → profiles.id  |      |
 | theme_id     | uuid FK → themes.id    |      |
 | mood_id      | uuid FK → moods.id     |      |
 | sentence_id  | uuid FK → sentences.id |      |
@@ -93,7 +93,7 @@
 | 컬럼        | 타입                  | 설명                 |
 | ----------- | --------------------- | -------------------- |
 | id          | uuid PK               |                      |
-| user_id     | uuid FK → profiles.id |                      |
+| user_id     | text FK → profiles.id |                      |
 | item_type   | enum                  |                      |
 | item_id     | uuid                  | themes 또는 moods id |
 | unlocked_at | timestamptz           |                      |
