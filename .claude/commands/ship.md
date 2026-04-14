@@ -2,6 +2,30 @@
 
 ---
 
+## 0단계: main 최신 동기화 (충돌 예방)
+
+브랜치 생성 전 또는 PR 전에 반드시 실행한다:
+
+```bash
+git fetch origin main
+```
+
+현재 브랜치가 main 최신 커밋을 포함하는지 확인:
+
+```bash
+git merge-base --is-ancestor origin/main HEAD && echo "✅ main과 동기화됨" || echo "⚠️ main에 새 커밋 있음 — rebase 필요"
+```
+
+동기화가 안 된 경우 rebase로 최신화:
+
+```bash
+git rebase origin/main
+```
+
+충돌 발생 시 해결 후 `git rebase --continue`. 해결이 복잡하면 `git rebase --abort` 후 사용자에게 알린다.
+
+---
+
 ## 1단계: 변경사항 파악
 
 ```bash

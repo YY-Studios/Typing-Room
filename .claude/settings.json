@@ -23,6 +23,10 @@
           {
             "type": "command",
             "command": "cd /c/Users/user/Typing-Room && npx prettier --write \"${CLAUDE_TOOL_INPUT_FILE_PATH}\" 2>/dev/null || true"
+          },
+          {
+            "type": "command",
+            "command": "echo \"${CLAUDE_TOOL_INPUT_FILE_PATH}\" | grep -q 'src/app/api/' && echo '⚡ API 라우트 변경 감지 — 작업 완료 후 curl 테스트를 실행하세요' || true"
           }
         ]
       }
